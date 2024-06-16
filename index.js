@@ -14,8 +14,10 @@ const io = new socketIO.Server(server, {
 })
 
 io.on('connection', (socket) => {
-    console.log("connecting now:",socket.id);
+    console.log("connecting to server:",socket.id);
     
+    socket.emit('welcome',socket.id)
+
     socket.on('new-msg-client',(data)=>{
         console.log(socket.id, " | new message: ",data);
         io.emit('msg-server',data);
